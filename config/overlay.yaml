@@ -1,0 +1,31 @@
+# 修改后重启图传节点。只订阅遥测，不发布飞控指令、不调用飞控服务。
+# line 从 1 开始，最大 12；相同行按 fields 数组顺序排列，保留空白行。
+overlay:
+  update_hz: 5.0
+  font_desc: "Sans 20"
+  xpad: 16
+  ypad: 16
+  time_line: 1
+  stats_enabled: true
+  stats_line: 2
+  fps_precision: 0
+  mbps_precision: 2
+  # Mbps 为本机 udpsink 提交的 RTP 数据字节差 * 8 / 秒 / 1000000，非电台可用带宽。
+  telemetry_timeout_sec: 3.0  # steady_clock 计接收年龄；不依赖仿真时间
+  missing_text: "--"
+  stale_text: "STALE"
+  invalid_text: "N/A"
+  separator: "  "
+  topics:
+    velocity: /mavros/local_position/velocity_local  # geometry_msgs/TwistStamped；ENU，m/s
+    attitude: /mavros/imu/data                       # sensor_msgs/Imu；ENU/FLU 四元数
+    battery: /mavros/battery                         # sensor_msgs/BatteryState，percentage=0..1
+    satellites: /mavros/global_position/raw/satellites # std_msgs/UInt32；255 表示未知
+  fields:
+    - {name: battery,          enabled: true,  line: 3, label: Battery, precision: 0, unit: "%"}
+    - {name: satellites,       enabled: true,  line: 3, label: Sat,     precision: 0, unit: ""}
+    - {name: horizontal_speed, enabled: false, line: 4, label: HSpeed,  precision: 1, unit: "m/s"}
+    - {name: vertical_speed,   enabled: false, line: 4, label: VSpeed,  precision: 1, unit: "m/s"}
+    - {name: pitch,            enabled: false, line: 5, label: Pitch,   precision: 1, unit: deg}
+    - {name: yaw,              enabled: false, line: 5, label: Yaw,     precision: 1, unit: deg}
+    - {name: roll,             enabled: false, line: 5, label: Roll,    precision: 1, unit: deg}

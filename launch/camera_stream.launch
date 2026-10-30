@@ -1,0 +1,15 @@
+<launch>
+  <arg name="overlay_config" default="$(find uav_camera_stream)/config/overlay.yaml"/>
+  <arg name="destination_ip" default=""/>
+  <arg name="destination_port" default="5600"/>
+  <arg name="enabled" default="true"/>
+  <arg name="device" default="/dev/v4l/by-id/usb-AX_USB2.0_AX_USB2.0-video-index0"/>
+  <node pkg="uav_camera_stream" type="camera_stream_node" name="camera_stream" output="screen" required="true" clear_params="true">
+    <rosparam command="load" file="$(find uav_camera_stream)/config/camera.yaml"/>
+    <rosparam command="load" file="$(arg overlay_config)"/>
+    <param name="destination_ip" value="$(arg destination_ip)"/>
+    <param name="destination_port" value="$(arg destination_port)"/>
+    <param name="device" value="$(arg device)"/>
+    <param name="enabled" value="$(arg enabled)"/>
+  </node>
+</launch>

@@ -1,0 +1,16 @@
+device: /dev/v4l/by-id/usb-AX_USB2.0_AX_USB2.0-video-index0
+destination_ip: ""  # 必须由 launch 参数指定，不能填地面监听地址 0.0.0.0
+destination_port: 5600
+capture_width: 1280
+capture_height: 720
+capture_fps: 31  # AX 相机枚举 MJPEG 720p31；不能沿用旧相机的 60
+output_fps: 30
+bitrate_bps: 2000000
+idr_interval_frames: 30
+rtp_mtu: 1200
+overlay_time: true
+overlay_timezone: Asia/Shanghai
+time_format: "%y%m%d-%H%M%S"  # 自动追加简短 UTC 偏移，例如 +8、+5:30
+no_frame_timeout_sec: 5.0
+restart_delay_sec: 3.0
+enabled: true

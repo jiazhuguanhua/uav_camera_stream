@@ -1,0 +1,16 @@
+# Generated ROS/catkin files
+build/
+devel/
+install/
+logs/
+.catkin_tools/
+# Local outputs and editor files
+*.log
+*.bag
+*.png
+*.mp4
+*.h264
+*.tmp
+*.swp
+.vscode/
+.idea/
